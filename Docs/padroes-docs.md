@@ -1,101 +1,66 @@
-# 🚀 Convenções de Frontend - Sistema Acadêmico (React + Tailwind + Figma)
+# 📃 Convenções de Documentação - Sistema Acadêmico (sa)
 
-Este documento define as boas práticas e convenções para o desenvolvimento frontend do **Sistema Acadêmico (sa)**, usando **React**, **Tailwind CSS** e **Figma** como base para design e implementação.
+Este guia define o padrão e a estrutura da documentação oficial do projeto **Sistema Acadêmico (sa)**, com o objetivo de manter consistência, clareza e rastreabilidade entre os membros das equipes (frontend, backend, banco de dados e design).
 
 ---
 
-## 🔢 Estrutura de Pastas
+## 🔢 Estrutura da Pasta `docs/`
 ```
-src/
-├── assets/         # Imagens, ícones, logos, fontes
-├── components/     # Componentes reutilizáveis (ex: Botão, Card, Modal)
-├── pages/          # Páginas completas da aplicação (ex: Login, Dashboard)
-├── layouts/        # Estrutura base das páginas (ex: Sidebar + Header)
-├── services/       # Requisições HTTP (ex: axios)
-├── hooks/          # Hooks personalizados (useAuth, useForm, etc.)
-├── contexts/       # Context API (ex: AuthContext)
-├── styles/         # Configurações do Tailwind, estilos globais
-├── router/         # Rotas da aplicação (react-router-dom)
-├── types/          # Tipagens e interfaces (se usar TS)
-└── App.jsx         # Ponto de entrada da aplicação
-```
-
----
-
-## 🔍 Convenções de Código
-
-### Linguagem:
-- React (Vite ou CRA)
-- Preferîncialmente com **TypeScript**
-
-### Padrão de escrita:
-- Componentes e arquivos em `PascalCase`
-- Funções e variáveis em `camelCase`
-- Pastas em `kebab-case`
-
-### Componentes:
-- Usar **componente funcional** com hooks (sem classe)
-- Reutilizar o máximo possível (criar subcomponentes se precisar)
-- Incluir prop `children` se for componente de layout
-
----
-
-## 🌟 Estilização com Tailwind CSS
-
-### Vantagens:
-- Rápido, responsivo, baseado em utilitários
-- Totalmente personalizável via `tailwind.config.js`
-
-### Boas práticas:
-- Evitar strings longas: use classes compostas via `clsx` ou `classnames`
-- Preferir **componentes estilizados com props** ao invés de repetir classes
-- Cores, fontes e espaçamentos devem seguir o design do Figma
-
-### Exemplo:
-```jsx
-<button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-  Entrar
-</button>
+docs/
+├── README.md                   # Visão geral do sistema
+├── regras-de-negocio.md       # Perfis, permissões, fluxos
+├── padroes-banco.md           # Convenção de modelagem de dados
+├── backend-convencao.md       # Estrutura e padrões de backend
+├── frontend-convencao.md      # Estrutura e padrões de frontend
+├── diagramas/
+│   ├── casos-de-uso.drawio
+│   ├── entidade-relacionamento.drawio
+│   ├── classes.drawio
+│   └── fluxograma-operacional.drawio
+└── glossario-e-api.md         # Termos técnicos e estrutura de endpoints
 ```
 
 ---
 
-## 🎨 Integração com Figma
-- Todo componente ou página deve ter referência ao layout correspondente no Figma
-- Nome das camadas no Figma deve refletir a estrutura de componentes React
-- Designers e devs devem alinhar espaçamentos, cores e responsividade
+## 📕 Documentos obrigatórios
 
-### Checklist por tela:
-- [ ] Mobile e Desktop prontos
-- [ ] Fontes e espaçamentos conferidos
-- [ ] Componentes reutilizados no Figma e no código
-- [ ] Cores do Tailwind mapeadas com a paleta do projeto
-
----
-
-## 📅 Gerenciamento de Estado
-- Usar **Context API** ou **Zustand** para estados globais simples
-- Para requisições, usar `axios` com `useEffect` ou **React Query** (se preferir caching)
-- Formularios podem usar `react-hook-form`
+| Arquivo                    | Responsáveis                 | Objetivo                                               |
+|---------------------------|-------------------------------|--------------------------------------------------------|
+| `README.md`               | Scrum Master + Tech Leads     | Apresenta objetivos, stack, estrutura geral            |
+| `regras-de-negocio.md`    | PO + Documentação            | Define papeis, regras de fluxo, políticas de acesso   |
+| `padroes-banco.md`        | Banco de Dados                | Padrões de nomeação, chaves, tipos, procedures        |
+| `backend-convencao.md`    | Tech Lead Backend             | Estrutura do projeto, uso de services e autenticação |
+| `frontend-convencao.md`   | Tech Lead Frontend            | Estrutura, padrões de componentes e integração com Figma |
+| `glossario-e-api.md`      | Documentação + Backend        | Descrição de endpoints e termos padronizados         |
 
 ---
 
-## 📁 Conexão com Backend
-- Base URL centralizada no `.env`
-- Serviços criados em `src/services/` com `axios.create()`
+## 📈 Diagramação visual
 
-```js
-// services/alunoService.js
-export const listarAlunos = () => api.get("/alunos");
-```
+Os diagramas devem ser organizados na pasta `docs/diagramas/` e podem ser elaborados com **Draw.io**, **Figma**, ou **Lucidchart**, seguindo as boas práticas de modelagem UML.
 
----
-
-## 📄 Documentação e Contribuição
-- Todas as telas/componentes devem ter **comentário explicando props**
-- Arquivos principais devem ter docblock `/** ... */`
-- Seguir convenções deste documento para novos componentes
+### Diagramas obrigatórios:
+- Casos de Uso (baseado nas interações de cada perfil)
+- Diagrama ER (relacionamentos do banco de dados)
+- Diagrama de Classes (baseado nos models do backend)
+- Fluxograma de Ações (ex: fluxo de entrega de atividade)
 
 ---
 
-> Manter este guia atualizado é responsabilidade do time de frontend. Atualizações devem ser discutidas entre os tech leads e validadas em sprint reviews.
+## ✏️ Padrão de escrita Markdown
+- Utilize `#`, `##`, `###` para títulos hierárquicos
+- Use listas ordenadas (`1.`) para sequências e não ordenadas (`-`) para tópicos
+- Coloque blocos de código com crase tripla `` ``` ``
+- Utilize tabelas sempre que for listar elementos relacionados
+
+---
+
+## 🎓 Recomendações Gerais
+- Toda mudança relevante na documentação deve ser registrada em commit separado com mensagem `docs: atualização em <arquivo>`
+- Evite arquivos duplicados ou desatualizados
+- Sempre vincule arquivos `.md` com os `.drawio` correspondentes nos diagramas
+
+---
+
+> A equipe de documentação é responsável por manter este guia e revisar a organização de `docs/` em toda sprint review.
+
